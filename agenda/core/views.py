@@ -104,6 +104,9 @@ def delete_evento(request, id_evento):
 
 
 def json_lista_evento(request, id_usuario):
-    usuario = User.objects.get(id=id_usuario)
+    try:
+        usuario = User.objects.get(id=id_usuario)
+    except Exception:
+        raise Http404()
     evento = Evento.objects.filter(usuario=usuario).values('id', 'titulo')
     return JsonResponse(list(evento), safe=False)

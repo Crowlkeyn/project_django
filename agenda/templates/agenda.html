@@ -11,8 +11,12 @@
     {% for evento in eventos %}
 
         <li>
-            <div style={% if evento.get_evento_atrasado %}
+            <div style={% if evento.get_evento_situacao == 1 %}
                             "color:red"
+                        {% elif evento.get_evento_situacao == 2 %}
+                            "color:yellow"
+                        {% else %}
+                            "color:black"
                         {% endif %}>
                 {{ evento.titulo }} - {{ evento.get_data_evento }}
                 <a href="evento/?id={{ evento.id }}">Editar</a>
